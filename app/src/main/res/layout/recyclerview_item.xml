@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.daimajia.swipe.SwipeLayout xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        swipe:leftEdgeSwipeOffset="0dp"
+        swipe:rightEdgeSwipeOffset="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/back_ll_2"
+                android:orientation="horizontal">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/back_image_1"
+                    android:layout_width="@dimen/image_width"
+
+                    android:layout_height="@dimen/image_hieght" />
+
+                <com.sprungsolutions.sitorstart.FontTextView
+                    android:id="@+id/back_name_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="name"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    app:fontName="fire_sans_bold.otf" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/back_ll_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:orientation="horizontal">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/back_image_2"
+                    android:layout_width="@dimen/image_width"
+
+                    android:layout_height="@dimen/image_hieght" />
+
+                <com.sprungsolutions.sitorstart.FontTextView
+                    android:id="@+id/back_name_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="name"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    app:fontName="fire_sans_bold.otf" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/item_selector"
+            android:elevation="5dp"
+
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:id="@+id/front_ll_1"
+                android:tag="not-selected"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/vs"
+                android:gravity="center"
+                android:layout_weight="49"
+                android:padding="3dp"
+                android:orientation="horizontal">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/front_image_1"
+                    android:layout_width="@dimen/image_width"
+
+                    android:layout_height="@dimen/image_hieght" />
+
+                <com.sprungsolutions.sitorstart.FontTextView
+                    android:id="@+id/front_name_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:text="name"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    app:fontName="fire_sans_bold.otf" />
+            </LinearLayout>
+
+            <com.sprungsolutions.sitorstart.FontTextView
+                android:id="@+id/vs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Vs"
+                android:layout_gravity="center"
+                android:layout_weight="10"
+                android:textColor="@color/red"
+                android:textSize="28sp"
+                app:fontName="lobster.otf" />
+
+            <LinearLayout
+                android:id="@+id/front_ll_2"
+                android:layout_width="0dp"
+                android:padding="3dp"
+
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="48"
+                android:tag="not-selected"
+                android:orientation="horizontal">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/front_image_2"
+                    android:layout_width="@dimen/image_width"
+
+                    android:layout_height="@dimen/image_hieght" />
+
+                <com.sprungsolutions.sitorstart.FontTextView
+                    android:id="@+id/front_name_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:text="name"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    app:fontName="fire_sans_bold.otf" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.daimajia.swipe.SwipeLayout>
+</LinearLayout>
