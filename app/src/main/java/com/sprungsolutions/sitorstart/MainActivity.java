@@ -1,5 +1,6 @@
 package com.sprungsolutions.sitorstart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -50,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(),AddPlayerSetActivity.class);
+                startActivityForResult(intent,11);
             }
         });
 
@@ -60,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         mPLayerList = new ArrayList<>();
         // Item Decorator:
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
-        mAdapter = new RecyclerViewAdapter(MainActivity.this, mPLayerList);
-        ((RecyclerViewAdapter) mAdapter).setMode(Attributes.Mode.Single);
+        mAdapter = new SSRecyclerViewAdapter(MainActivity.this, mPLayerList);
+        ((SSRecyclerViewAdapter) mAdapter).setMode(Attributes.Mode.Single);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(onScrollListener);
 
@@ -185,5 +189,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return post;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ssPrefrenceManager.removeKey(SSSharedPreferencesManager.START_OR_SIT_SET_ID);
     }
 }

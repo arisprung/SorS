@@ -14,6 +14,20 @@ public class PlayerSetFirebase {
     private String set_id;
     private boolean player1selected;
     private boolean player2selected;
+    private String mlb_pos_1;
+    private String mlb_pos_2;
+    private String mlb_team_1;
+    private String mlb_team_2;
+    private String bats_2;
+    private String bats_1;
+    private String throws_1;
+    private String throws_2;
+    private String mlb_team_long_2;
+    private String mlb_team_long_1;
+    private String birth_year_1;
+    private String birth_year_2;
+
+
 
 
     public PlayerSetFirebase() {
@@ -89,5 +103,101 @@ public class PlayerSetFirebase {
 
     public void setPlayer2selected(boolean player2selected) {
         this.player2selected = player2selected;
+    }
+
+    public String getMlb_pos_1() {
+        return mlb_pos_1;
+    }
+
+    public void setMlb_pos_1(String mlb_pos_1) {
+        this.mlb_pos_1 = mlb_pos_1;
+    }
+
+    public String getMlb_pos_2() {
+        return mlb_pos_2;
+    }
+
+    public void setMlb_pos_2(String mlb_pos_2) {
+        this.mlb_pos_2 = mlb_pos_2;
+    }
+
+    public String getMlb_team_1() {
+        return mlb_team_1;
+    }
+
+    public void setMlb_team_1(String mlb_team_1) {
+        this.mlb_team_1 = mlb_team_1;
+    }
+
+    public String getMlb_team_2() {
+        return mlb_team_2;
+    }
+
+    public void setMlb_team_2(String mlb_team_2) {
+        this.mlb_team_2 = mlb_team_2;
+    }
+
+    public String getBats_2() {
+        return bats_2;
+    }
+
+    public void setBats_2(String bats_2) {
+        this.bats_2 = bats_2;
+    }
+
+    public String getBats_1() {
+        return bats_1;
+    }
+
+    public void setBats_1(String bats_1) {
+        this.bats_1 = bats_1;
+    }
+
+    public String getThrows_1() {
+        return throws_1;
+    }
+
+    public void setThrows_1(String throws_1) {
+        this.throws_1 = throws_1;
+    }
+
+    public String getThrows_2() {
+        return throws_2;
+    }
+
+    public void setThrows_2(String throws_2) {
+        this.throws_2 = throws_2;
+    }
+
+    public String getMlb_team_long_2() {
+        return mlb_team_long_2;
+    }
+
+    public void setMlb_team_long_2(String mlb_team_long_2) {
+        this.mlb_team_long_2 = mlb_team_long_2;
+    }
+
+    public String getMlb_team_long_1() {
+        return mlb_team_long_1;
+    }
+
+    public void setMlb_team_long_1(String mlb_team_long_1) {
+        this.mlb_team_long_1 = mlb_team_long_1;
+    }
+
+    public String getBirth_year_1() {
+        return birth_year_1;
+    }
+
+    public void setBirth_year_1(String birth_year_1) {
+        this.birth_year_1 = birth_year_1;
+    }
+
+    public String getBirth_year_2() {
+        return birth_year_2;
+    }
+
+    public void setBirth_year_2(String birth_year_2) {
+        this.birth_year_2 = birth_year_2;
     }
 }
