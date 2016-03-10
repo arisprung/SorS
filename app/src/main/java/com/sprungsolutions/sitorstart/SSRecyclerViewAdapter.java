@@ -191,6 +191,7 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
         RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams)
                 viewHolder.mPercent2 .getLayoutParams();
+        
         int i2 = (int)Math.floor(percent2);
         params2.width = i2*2;
         viewHolder.mPercent2 .setLayoutParams(params2);
