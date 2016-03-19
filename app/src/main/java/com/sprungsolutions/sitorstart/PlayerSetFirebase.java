@@ -20,8 +20,8 @@ public class PlayerSetFirebase {
     private String mlb_team_2;
     private String bats_2;
     private String bats_1;
-    private String throws_1;
-    private String throws_2;
+    private String arm_throws_1;
+    private String arm_throws_2;
     private String mlb_team_long_2;
     private String mlb_team_long_1;
     private String birth_year_1;
@@ -153,21 +153,6 @@ public class PlayerSetFirebase {
         this.bats_1 = bats_1;
     }
 
-    public String getThrows_1() {
-        return throws_1;
-    }
-
-    public void setThrows_1(String throws_1) {
-        this.throws_1 = throws_1;
-    }
-
-    public String getThrows_2() {
-        return throws_2;
-    }
-
-    public void setThrows_2(String throws_2) {
-        this.throws_2 = throws_2;
-    }
 
     public String getMlb_team_long_2() {
         return mlb_team_long_2;
@@ -199,5 +184,21 @@ public class PlayerSetFirebase {
 
     public void setBirth_year_2(String birth_year_2) {
         this.birth_year_2 = birth_year_2;
+    }
+
+    public String getArm_throws_2() {
+        return arm_throws_2;
+    }
+
+    public void setArm_throws_2(String arm_throws_2) {
+        this.arm_throws_2 = arm_throws_2;
+    }
+
+    public String getArm_throws_1() {
+        return arm_throws_1;
+    }
+
+    public void setArm_throws_1(String arm_throws_1) {
+        this.arm_throws_1 = arm_throws_1;
     }
 }

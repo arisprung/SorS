@@ -1,0 +1,102 @@
+package com.sprungsolutions.sitorstart;
+
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by arisprung on 3/14/16.
+ */
+public class PickPlayerActivity extends AppCompatActivity implements SearchView.OnQueryTextListener  {
+
+    private RecyclerView mRecyclerView;
+
+    private FilteredPlayerAdapter mAdapter;
+
+    private ArrayList<Player> mPLayerList;
+    private ArrayList<PlayerSetFirebase> mList;
+    private SSSharedPreferencesManager ssPrefrenceManager;
+    private SearchView mSearchView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        SearchView serachView = (SearchView) getLayoutInflater().inflate(R.layout.search_view_layout, null);
+        toolbar.addView(serachView);
+        serachView.setOnQueryTextListener(this);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mSearchView = (SearchView) findViewById(R.id.searchView);
+        mSearchView.setVisibility(View.VISIBLE);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.GONE);
+
+        // Layout Managers:
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mPLayerList = SitOrStartApplication.getInstance().getmPlayerArrayList();
+        // Item Decorator:
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
+        mAdapter = new FilteredPlayerAdapter(getApplicationContext(),mPLayerList);
+        // ((PickPlayerAdapter) mAdapter).setMode(Attributes.Mode.Single);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.SetOnItemClickListener(new FilteredPlayerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Player player = mPLayerList.get(position);
+                Intent returnIntent = new Intent();
+                Gson gson = new Gson();
+                returnIntent.putExtra("player_result",gson.toJson(player));
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        final List<Player> filteredModelList = filter(mPLayerList, query);
+        mAdapter.animateTo(filteredModelList);
+        mRecyclerView.scrollToPosition(0);
+        return true;
+    }
+
+    private List<Player> filter(List<Player> models, String query) {
+        query = query.toLowerCase();
+
+        final List<Player> filteredModelList = new ArrayList<>();
+        for (Player model : models) {
+            final String text = model.getMlb_name().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }
+}

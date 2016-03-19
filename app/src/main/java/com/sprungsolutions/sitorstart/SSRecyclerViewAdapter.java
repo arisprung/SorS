@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.daimajia.swipe.implments.SwipeItemRecyclerMangerImpl;
@@ -32,6 +30,7 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
     private Activity mContext;
     private ArrayList<PlayerSetFirebase> mDataset;
     private SSSharedPreferencesManager ssPrefrenceManager;
+    private final float INCREASE_BAR = 500.0f;
 
 
     public SSRecyclerViewAdapter(Activity context, ArrayList<PlayerSetFirebase> objects) {
@@ -181,23 +180,39 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 //        }
 
 
-        float percent1 = (item.getMlb_set_score_1() * 100.0f) / total;
-        float percent2 = (item.getMlb_set_score_2() * 100.0f) / total;
+        float percent1 = (item.getMlb_set_score_1() * 100.0f) / (total);
+        float percent2 = (item.getMlb_set_score_2() * 100.0f) / (total);
+
+
+        int i1 = (int) Math.floor(percent1);
         RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams)
                 viewHolder.mPercent1 .getLayoutParams();
-        int i1 = (int) Math.floor(percent1);
-        params1.width = i1*2;
+       double di1 =i1/100.0f;
+
+
+
+        params1.width =(int) (di1*INCREASE_BAR);
         viewHolder.mPercent1 .setLayoutParams(params1);
 
+
+        int i2 = (int)Math.floor(percent2);
+        double di2 =i2/100.0f;
         RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams)
                 viewHolder.mPercent2 .getLayoutParams();
-        
-        int i2 = (int)Math.floor(percent2);
-        params2.width = i2*2;
+        params2.width = (int) (di2*INCREASE_BAR);
         viewHolder.mPercent2 .setLayoutParams(params2);
 
         viewHolder.mPercentText1.setText(i1+"%");
         viewHolder.mPercentText2.setText(i2+"%");
+
+
+        if(i1>i2){
+            viewHolder.mPercent1.setBackgroundResource(android.R.color.holo_green_dark);
+            viewHolder.mPercent2.setBackgroundResource(android.R.color.darker_gray);
+        }else if(i2>i2){
+            viewHolder.mPercent2.setBackgroundResource(android.R.color.holo_green_dark);
+            viewHolder.mPercent1.setBackgroundResource(android.R.color.darker_gray);
+        }
 
 
 

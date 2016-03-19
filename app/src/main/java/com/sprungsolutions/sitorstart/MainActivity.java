@@ -1,9 +1,7 @@
 package com.sprungsolutions.sitorstart;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,14 +10,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.daimajia.swipe.util.Attributes;
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-
 import java.util.ArrayList;
 
 
@@ -28,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
 
     private RecyclerView.Adapter mAdapter;
-    private Firebase myFirebaseRef;
+
     private ArrayList<PlayerSetFirebase> mPLayerList;
     private ArrayList<PlayerSetFirebase> mList;
     private SSSharedPreferencesManager ssPrefrenceManager;
@@ -37,14 +33,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Firebase.setAndroidContext(this);
+
         ssPrefrenceManager = SSSharedPreferencesManager.getInstance(getApplicationContext());
-        myFirebaseRef = new Firebase("https://sitorstart.firebaseio.com/");
-        myFirebaseRef.authAnonymously(new AuthResultHandler("anonymous"));
+
+      //  SitOrStartApplication.getInstance().getMyFirebaseRef().authAnonymously(new AuthResultHandler("anonymous"));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -54,8 +49,15 @@ public class MainActivity extends AppCompatActivity {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 
-                Intent intent = new Intent(getApplicationContext(),AddPlayerSetActivity.class);
-                startActivityForResult(intent,11);
+//                Intent intent = new Intent(getApplicationContext(),AddPlayerSetActivity.class);
+//                startActivityForResult(intent,11);
+
+                Bundle args = new Bundle();
+                args.putString("title", "Dialog with Action Bar");
+                AddPlayerSetFragment actionbarDialog = new AddPlayerSetFragment();
+                actionbarDialog.setArguments(args);
+                actionbarDialog.show(getSupportFragmentManager(),
+                        "action_bar_frag");
             }
         });
 
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         ((SSRecyclerViewAdapter) mAdapter).setMode(Attributes.Mode.Single);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(onScrollListener);
+        loadPLayersSetFromFireBase();
 
     }
 
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         public void onAuthenticated(AuthData authData) {
 
 
-            loadPLayersSetFromFireBase();
+
             //     setAuthenticatedUser(authData);
         }
 
@@ -140,20 +143,26 @@ public class MainActivity extends AppCompatActivity {
     private void loadPLayersSetFromFireBase() {
         //  mAuthProgressDialog.hide();
 
-        myFirebaseRef.child("sports/mlb/mlb_player_set").addValueEventListener(new ValueEventListener() {
+        SitOrStartApplication.getInstance().getMyFirebaseRef().child("sports/mlb/mlb_player_set").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                mPLayerList.clear();
+                try{
+                    mPLayerList.clear();
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        PlayerSetFirebase post = postSnapshot.getValue(PlayerSetFirebase.class);
+                        post.setSet_id(postSnapshot.getKey());
+                        PlayerSetFirebase post1 = checkIfPlayerWasSelected(post);
+                        mPLayerList.add(post1);
 
-                    PlayerSetFirebase post = postSnapshot.getValue(PlayerSetFirebase.class);
-                    post.setSet_id(postSnapshot.getKey());
-                    PlayerSetFirebase post1 = checkIfPlayerWasSelected(post);
-                    mPLayerList.add(post1);
+                    }
+                    mAdapter.notifyDataSetChanged();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
-                }//
-                mAdapter.notifyDataSetChanged();
+
+
 
             }
 
