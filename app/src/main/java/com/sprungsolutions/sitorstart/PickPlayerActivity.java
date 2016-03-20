@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -20,14 +21,13 @@ import java.util.List;
 /**
  * Created by arisprung on 3/14/16.
  */
-public class PickPlayerActivity extends AppCompatActivity implements SearchView.OnQueryTextListener  {
+public class PickPlayerActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView mRecyclerView;
 
     private FilteredPlayerAdapter mAdapter;
 
     private ArrayList<Player> mPLayerList;
-    private ArrayList<PlayerSetFirebase> mList;
     private SSSharedPreferencesManager ssPrefrenceManager;
     private SearchView mSearchView;
 
@@ -41,6 +41,7 @@ public class PickPlayerActivity extends AppCompatActivity implements SearchView.
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         SearchView serachView = (SearchView) getLayoutInflater().inflate(R.layout.search_view_layout, null);
+        serachView.setIconified(false);
         toolbar.addView(serachView);
         serachView.setOnQueryTextListener(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -56,21 +57,25 @@ public class PickPlayerActivity extends AppCompatActivity implements SearchView.
         mPLayerList = SitOrStartApplication.getInstance().getmPlayerArrayList();
         // Item Decorator:
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
-        mAdapter = new FilteredPlayerAdapter(getApplicationContext(),mPLayerList);
+        mAdapter = new FilteredPlayerAdapter(getApplicationContext(), mPLayerList);
         // ((PickPlayerAdapter) mAdapter).setMode(Attributes.Mode.Single);
         mRecyclerView.setAdapter(mAdapter);
+
+
         mAdapter.SetOnItemClickListener(new FilteredPlayerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Player player = mPLayerList.get(position);
+            public void onItemClick(Player player) {
+             //   Toast.makeText(getApplicationContext(), player.toString(), Toast.LENGTH_SHORT).show();
+
                 Intent returnIntent = new Intent();
                 Gson gson = new Gson();
-                returnIntent.putExtra("player_result",gson.toJson(player));
-                setResult(Activity.RESULT_OK,returnIntent);
+                returnIntent.putExtra("player_result", gson.toJson(player));
+                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
 
             }
         });
+
 
     }
 

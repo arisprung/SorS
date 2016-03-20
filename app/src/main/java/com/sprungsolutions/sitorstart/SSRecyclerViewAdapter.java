@@ -1,15 +1,14 @@
 package com.sprungsolutions.sitorstart;
 
 import android.app.Activity;
-import android.app.IntentService;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.daimajia.swipe.implments.SwipeItemRecyclerMangerImpl;
@@ -28,12 +27,12 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
     protected SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
     private Activity mContext;
-    private ArrayList<PlayerSetFirebase> mDataset;
+    private ArrayList<NewPlayerSet> mDataset;
     private SSSharedPreferencesManager ssPrefrenceManager;
     private final float INCREASE_BAR = 500.0f;
 
 
-    public SSRecyclerViewAdapter(Activity context, ArrayList<PlayerSetFirebase> objects) {
+    public SSRecyclerViewAdapter(Activity context, ArrayList<NewPlayerSet> objects) {
         mContext = context;
         mDataset = objects;
         ssPrefrenceManager = SSSharedPreferencesManager.getInstance(mContext);
@@ -53,62 +52,73 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
             @Override
             public void onFirstLayout(LinearLayout view, int i) {
-                PlayerSetFirebase item = mDataset.get(i);
+                NewPlayerSet item = mDataset.get(i);
                 view.setBackgroundResource(R.drawable.border_layout);
                 if (view.getTag().equals("selected")) {
-                    ssPrefrenceManager.removeID(mContext, item.getSet_id() + 1);
-                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i,false)[0]);
+                    ssPrefrenceManager.removeID(mContext, item.getId() + 1);
+                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i, false)[0]);
                     view.setTag("not-selected");
-                    item.setPlayer1selected(false);
-                    layoutSelected(item.getSet_id(), 1,false);
+                    item.getmPlayer1().setSelected(false);
+                    layoutSelected(item.getId(), 1, false);
                 } else {
                     ViewGroup row = (ViewGroup) view.getParent();
                     View view2 = row.getChildAt(1);
                     if (view2.getTag().equals("selected")) {
-                        ssPrefrenceManager.removeID(mContext, item.getSet_id() + 2);
-                        view2.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i,false)[1]);
+                        ssPrefrenceManager.removeID(mContext, item.getId() + 2);
+                        view2.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i, false)[1]);
                         view2.setTag("not-selected");
-                        item.setPlayer2selected(false);
-                        layoutSelected(item.getSet_id(), 2,false);
+                        item.getmPlayer2().setSelected(false);
+                        layoutSelected(item.getId(), 2, false);
                     }
-                    ssPrefrenceManager.addID(mContext, item.getSet_id() + 1);
-                    item.setPlayer1selected(true);
-                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i,true)[0]);
+                    ssPrefrenceManager.addID(mContext, item.getId() + 1);
+                    item.getmPlayer1().setSelected(true);
+                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i, true)[0]);
                     view.setTag("selected");
-                    layoutSelected(item.getSet_id(), 1,true);
+                    layoutSelected(item.getId(), 1, true);
                 }
 
             }
 
             @Override
+            public void onBackFirstLayout(LinearLayout view, int i) {
+
+            }
+
+            @Override
             public void onSecondLayout(LinearLayout view, int i) {
-                PlayerSetFirebase item = mDataset.get(i);
+                NewPlayerSet item = mDataset.get(i);
                 if (view.getTag().equals("selected")) {
-                    ssPrefrenceManager.removeID(mContext, item.getSet_id() + 2);
-                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i,false)[1]);
+                    ssPrefrenceManager.removeID(mContext, item.getId() + 2);
+                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i, false)[1]);
                     view.setTag("not-selected");
-                    item.setPlayer2selected(false);
-                    layoutSelected(item.getSet_id(), 2,false);
+                    item.getmPlayer2().setSelected(false);
+                    layoutSelected(item.getId(), 2, false);
                 } else {
                     ViewGroup row = (ViewGroup) view.getParent();
                     View view1 = row.getChildAt(0);
 
                     if (view1.getTag().equals("selected")) {
-                        ssPrefrenceManager.removeID(mContext, item.getSet_id() + 1);
-                        view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i,false)[0]);
+                        ssPrefrenceManager.removeID(mContext, item.getId() + 1);
+                        view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i, false)[0]);
                         view1.setTag("not-selected");
-                        item.setPlayer1selected(false);
-                        layoutSelected(item.getSet_id(), 1,false);
+                        item.getmPlayer1().setSelected(false);
+                        layoutSelected(item.getId(), 1, false);
                     }
-                    ssPrefrenceManager.addID(mContext, item.getSet_id() + 2);
-                    item.setPlayer2selected(true);
-                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i,true)[1]);
+                    ssPrefrenceManager.addID(mContext, item.getId() + 2);
+                    item.getmPlayer2().setSelected(true);
+                    view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i, true)[1]);
                     view.setTag("selected");
-                    layoutSelected(item.getSet_id(), 2,true);
+                    layoutSelected(item.getId(), 2, true);
 
 
                 }
 
+
+            }
+
+            @Override
+            public void onBackSecondLayout(LinearLayout view, int i) {
+                NewPlayerSet item = mDataset.get(i);
 
             }
         });
@@ -119,7 +129,7 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
     @Override
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position) {
-        PlayerSetFirebase item = mDataset.get(position);
+        NewPlayerSet item = mDataset.get(position);
         viewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 //        viewHolder.swipeLayout.addSwipeListener(new SimpleSwipeListener() {
 //            @Override
@@ -135,40 +145,40 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 //        });
 
 
-        viewHolder.mName1.setText(item.getMlb_name_1());
-        viewHolder.mName2.setText(item.getMlb_name_2());
+        viewHolder.mName1.setText(item.getmPlayer1().getMlb_name());
+        viewHolder.mName2.setText(item.getmPlayer2().getMlb_name());
 
-        viewHolder.mTeamName1.setText(item.getMlb_pos_1()+" - "+item.getMlb_team_1());
-        viewHolder.mTeamName2.setText(item.getMlb_pos_2()+" - "+item.getMlb_team_2());
+        viewHolder.mTeamName1.setText(item.getmPlayer1().getMlb_pos() + " - " + item.getmPlayer1().getMlb_team());
+        viewHolder.mTeamName2.setText(item.getmPlayer2().getMlb_pos() + " - " + item.getmPlayer2().getMlb_team());
 
-        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(item.getMlb_id_1()), viewHolder.imageView1);
-        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(item.getMlb_id_2()), viewHolder.imageView2);
-
-
-        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(item.getMlb_id_1()), viewHolder.backImageView1);
-        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(item.getMlb_id_2()), viewHolder.backImageView2);
+        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(Integer.valueOf(item.getmPlayer1().getMlb_id())), viewHolder.imageView1);
+        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(Integer.valueOf(item.getmPlayer2().getMlb_id())), viewHolder.imageView2);
 
 
-        if (item.isPlayer2selected()) {
-            viewHolder.mLinearLayout2.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position,true)[1]);
+        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(Integer.valueOf(item.getmPlayer1().getMlb_id())), viewHolder.backImageView1);
+        SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(Integer.valueOf(item.getmPlayer2().getMlb_id())), viewHolder.backImageView2);
+
+
+        if (item.getmPlayer2().isSelected()) {
+            viewHolder.mLinearLayout2.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position, true)[1]);
             viewHolder.mLinearLayout2.setTag("selected");
 
 
         } else {
-            viewHolder.mLinearLayout2.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position,false)[1]);
+            viewHolder.mLinearLayout2.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position, false)[1]);
             viewHolder.mLinearLayout2.setTag("not-selected");
 
         }
 
-        if (item.isPlayer1selected()) {
-            viewHolder.mLinearLayout1.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position,true)[0]);
+        if (item.getmPlayer1().isSelected()) {
+            viewHolder.mLinearLayout1.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position, true)[0]);
             viewHolder.mLinearLayout1.setTag("selected");
         } else {
-            viewHolder.mLinearLayout1.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position,false)[0]);
+            viewHolder.mLinearLayout1.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(position, false)[0]);
             viewHolder.mLinearLayout1.setTag("not-selected");
         }
 
-        int total = item.getMlb_set_score_1()+item.getMlb_set_score_2();
+        int total = item.getmPlayer1().getScore() + item.getmPlayer2().getScore();
 //        float percent1 = 0.1f;
 //        if(item.getMlb_set_score_1()!=0){
 //            percent1 = (total * 100.0f) / item.getMlb_set_score_1();
@@ -180,40 +190,37 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 //        }
 
 
-        float percent1 = (item.getMlb_set_score_1() * 100.0f) / (total);
-        float percent2 = (item.getMlb_set_score_2() * 100.0f) / (total);
+        float percent1 = (item.getmPlayer1().getScore() * 100.0f) / (total);
+        float percent2 = (item.getmPlayer2().getScore() * 100.0f) / (total);
 
 
         int i1 = (int) Math.floor(percent1);
-        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams)
-                viewHolder.mPercent1 .getLayoutParams();
-       double di1 =i1/100.0f;
+        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) viewHolder.mPercent1.getLayoutParams();
+        double di1 = i1 / 100.0f;
 
 
+        params1.width = (int) (di1 * INCREASE_BAR);
+        viewHolder.mPercent1.setLayoutParams(params1);
 
-        params1.width =(int) (di1*INCREASE_BAR);
-        viewHolder.mPercent1 .setLayoutParams(params1);
 
-
-        int i2 = (int)Math.floor(percent2);
-        double di2 =i2/100.0f;
+        int i2 = (int) Math.floor(percent2);
+        double di2 = i2 / 100.0f;
         RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams)
-                viewHolder.mPercent2 .getLayoutParams();
-        params2.width = (int) (di2*INCREASE_BAR);
-        viewHolder.mPercent2 .setLayoutParams(params2);
+                viewHolder.mPercent2.getLayoutParams();
+        params2.width = (int) (di2 * INCREASE_BAR);
+        viewHolder.mPercent2.setLayoutParams(params2);
 
-        viewHolder.mPercentText1.setText(i1+"%");
-        viewHolder.mPercentText2.setText(i2+"%");
+        viewHolder.mPercentText1.setText(i1 + "%");
+        viewHolder.mPercentText2.setText(i2 + "%");
 
 
-        if(i1>i2){
+        if (i1 > i2) {
             viewHolder.mPercent1.setBackgroundResource(android.R.color.holo_green_dark);
             viewHolder.mPercent2.setBackgroundResource(android.R.color.darker_gray);
-        }else if(i2>i2){
+        } else if (i2 > i2) {
             viewHolder.mPercent2.setBackgroundResource(android.R.color.holo_green_dark);
             viewHolder.mPercent1.setBackgroundResource(android.R.color.darker_gray);
         }
-
 
 
         mItemManger.bindView(viewHolder.itemView, position);
@@ -232,26 +239,26 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
     private void layoutSelected(String number, int type, final boolean incremnt) {
 
 
-        String strType = "mlb_set_score_1";
+        String strType = "mPlayer1";
 
         if (type == 1) {
-            strType = "mlb_set_score_1";
+            strType = "mPlayer1";
         } else if (type == 2) {
-            strType = "mlb_set_score_2";
+            strType = "mPlayer2";
         }
 
 
-        Firebase upvotesRef = new Firebase("https://sitorstart.firebaseio.com/sports/mlb/mlb_player_set/" + number + "/" + strType);
+        Firebase upvotesRef = new Firebase("https://sitorstart.firebaseio.com/sports/mlb/mlb_player_set/" + number + "/" + strType + "/score");
         upvotesRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData currentData) {
                 if (currentData.getValue() == null) {
-                    if(incremnt)
-                    currentData.setValue(1);
+                    if (incremnt)
+                        currentData.setValue(1);
                 } else {
-                    if(incremnt){
+                    if (incremnt) {
                         currentData.setValue((Long) currentData.getValue() + 1);
-                    }else{
+                    } else {
                         currentData.setValue((Long) currentData.getValue() - 1);
                     }
 
@@ -262,7 +269,7 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
             @Override
             public void onComplete(FirebaseError firebaseError, boolean committed, DataSnapshot currentData) {
                 //This method will be called once with the results of the transaction.
-               // Toast.makeText(mContext, "Your selection was processed", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(mContext, "Your selection was processed", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -270,7 +277,7 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public IMyViewHolderClicks mListener;
-       private SwipeLayout swipeLayout;
+        private SwipeLayout swipeLayout;
         private ImageView imageView1;
         private ImageView imageView2;
         private ImageView backImageView1;
@@ -280,6 +287,8 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
         private FontTextView mTeamName1;
         private FontTextView mTeamName2;
         private LinearLayout mLinearLayout1;
+        private LinearLayout mBackLinearLayout1;
+        private LinearLayout mBackLinearLayout2;
         private View mPercent1;
         private View mPercent2;
         private LinearLayout mLinearLayout2;
@@ -299,6 +308,8 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
             backImageView2 = (CircleImageView) itemView.findViewById(R.id.back_image_2);
             mLinearLayout1 = (LinearLayout) itemView.findViewById(R.id.front_ll_1);
             mLinearLayout2 = (LinearLayout) itemView.findViewById(R.id.front_ll_2);
+            mBackLinearLayout1 = (LinearLayout) itemView.findViewById(R.id.back_ll_1);
+            mBackLinearLayout2 = (LinearLayout) itemView.findViewById(R.id.back_ll_2);
             mName1 = (FontTextView) itemView.findViewById(R.id.front_name_1);
             mName2 = (FontTextView) itemView.findViewById(R.id.front_name_2);
             mPercent1 = (View) itemView.findViewById(R.id.player_percnt_1);
@@ -308,9 +319,10 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
             mPercentText2 = (FontTextView) itemView.findViewById(R.id.player_percnt_text_2);
 
 
-
             mLinearLayout1.setOnClickListener(this);
             mLinearLayout2.setOnClickListener(this);
+            mBackLinearLayout1.setOnClickListener(this);
+            mBackLinearLayout2.setOnClickListener(this);
 
 
 //            itemView.setOnClickListener(new View.OnClickListener() {
@@ -328,6 +340,10 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
                 mListener.onFirstLayout((LinearLayout) v, getLayoutPosition());
             } else if (v.getId() == R.id.front_ll_2) {
                 mListener.onSecondLayout((LinearLayout) v, getLayoutPosition());
+            } else if (v.getId() == R.id.back_ll_1) {
+                mListener.onSecondLayout((LinearLayout) v, getLayoutPosition());
+            } else if (v.getId() == R.id.back_ll_2) {
+                mListener.onSecondLayout((LinearLayout) v, getLayoutPosition());
             }
 
         }
@@ -335,8 +351,10 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
         public static interface IMyViewHolderClicks {
             public void onFirstLayout(LinearLayout view, int i);
+            public void onBackFirstLayout(LinearLayout view, int i);
 
             public void onSecondLayout(LinearLayout view, int i);
+            public void onBackSecondLayout(LinearLayout view, int i);
         }
 
     }

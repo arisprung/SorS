@@ -22,7 +22,8 @@ public class SitOrStartApplication extends Application {
     private static SitOrStartApplication instance;
     private Firebase myFirebaseRef;
     private ArrayList<Player> mPlayerArrayList;
-    private  boolean mIsFireBAseInitLoaded;
+    private ArrayList<NewPlayerSet> mPlayerSetArrayList;
+    private  boolean mIsFireBaseInitLoaded;
 
 
     @Override
@@ -39,7 +40,7 @@ public class SitOrStartApplication extends Application {
 
     private void init() {
 
-
+        mIsFireBaseInitLoaded = true;
         SitOrStartApplication.getInstance().getMyFirebaseRef().child("sports/mlb/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -84,7 +85,7 @@ public class SitOrStartApplication extends Application {
 
                 }//
 
-                Log.d("","");
+                mIsFireBaseInitLoaded = false;
 
 
             }
@@ -92,6 +93,7 @@ public class SitOrStartApplication extends Application {
             @Override
             public void onCancelled(FirebaseError error) {
                 System.out.println(error.toString());
+                mIsFireBaseInitLoaded = false;
             }
 
 
@@ -140,6 +142,14 @@ public class SitOrStartApplication extends Application {
     }
 
     public boolean ismIsFireBAseInitLoaded() {
-        return mIsFireBAseInitLoaded;
+        return mIsFireBaseInitLoaded;
+    }
+
+    public ArrayList<NewPlayerSet> getmPlayerSetArrayList() {
+        return mPlayerSetArrayList;
+    }
+
+    public void setmPlayerSetArrayList(ArrayList<NewPlayerSet> mPlayerSetArrayList) {
+        this.mPlayerSetArrayList = mPlayerSetArrayList;
     }
 }

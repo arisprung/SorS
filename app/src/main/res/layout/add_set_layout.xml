@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp"
+    android:padding="30dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,22 +22,58 @@
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/image_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dotted_box"
-            android:layout_marginRight="40dp"
-            android:tag="no_tag"
-            android:src="@android:drawable/ic_input_add" />
 
-        <ImageView
-            android:id="@+id/image_2"
+
+        <LinearLayout
+            android:id="@+id/player1_ll"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="no_tag"
-            android:background="@drawable/dotted_box"
-            android:src="@android:drawable/ic_input_add" />
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:id="@+id/circle_image1"
+                android:background="@drawable/dotted_box"
+                android:src="@android:drawable/ic_input_add"
+                android:layout_height="100dp" />
+
+            <com.sprungsolutions.sitorstart.FontTextView
+                android:id="@+id/name1"
+                android:text="www"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/player2_ll"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:id="@+id/circle_image2"
+                android:background="@drawable/dotted_box"
+                android:src="@android:drawable/ic_input_add"
+                android:layout_height="100dp" />
+
+            <com.sprungsolutions.sitorstart.FontTextView
+                android:id="@+id/name2"
+                android:layout_width="wrap_content"
+                android:text="wwww"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

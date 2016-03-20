@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Player model = mModels.get(position);
-        holder.bind(model);
+        holder.bind(model,position);
     }
 
     @Override
@@ -79,7 +81,7 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+        public void onItemClick(Player player);
     }
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -103,9 +105,10 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
         notifyItemMoved(fromPosition, toPosition);
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public  class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public FontTextView mPlayerName;
+        public LinearLayout mLinearLayout;
         public FontTextView mPlayerTeam;
         public CircleImageView mPlayerImage;
 
@@ -117,25 +120,31 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
             mPlayerName = (FontTextView)itemLayoutView.findViewById(R.id.player_name);
             mPlayerTeam = (FontTextView) itemLayoutView.findViewById(R.id.player_team_position);
             mPlayerImage = (CircleImageView)itemLayoutView.findViewById(R.id.player_image);
+            mLinearLayout = (LinearLayout)itemLayoutView.findViewById(R.id.picker_player_root);
 
-            itemLayoutView.setOnClickListener(this);
+
+
 
         }
 
-        public void bind(Player model) {
+        public void bind(Player model, final int position) {
             mPlayerName.setText(model.getMlb_name());
             mPlayerTeam.setText("("+model.getMlb_pos()+") "+model.getMlb_team_long());
 //        holder.mPlayerTeam.setChecked(cc.isSelected());
+
+            mLinearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mItemClickListner != null){
+                        mItemClickListner.onItemClick(mModels.get(position));
+                    }
+                }
+            });
 
             SitStartUtility.setImageInView(mContext, SitStartUtility.getImageUrl(Integer.valueOf(model.getMlb_id())),mPlayerImage );
         }
 
 
-        @Override
-        public void onClick(View v) {
-            if (mItemClickListner != null){
-                mItemClickListner.onItemClick(v,getPosition());
-            }
-        }
+
     }
 }

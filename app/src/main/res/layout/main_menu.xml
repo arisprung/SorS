@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <com.sprungsolutions.sitorstart.LabelButtonView
+            android:id="@+id/labelbutton1"
+            android:layout_width="@dimen/label_hieght"
+            android:layout_height="@dimen/label_width"
+            android:background="#03a9f4"
+            android:gravity="center"
+            android:text="Baseball Season 2016"
+            android:textColor="#ffffff"
+            app:label_backgroundColor="#C2185B"
+            app:label_orientation="RIGHT_TOP"
+            app:label_text="Coming Soon"
+            app:label_textSize="10sp"
+            app:label_visual="false" />
+
+        <com.sprungsolutions.sitorstart.LabelButtonView
+            android:id="@+id/labelbutton2"
+            android:layout_width="@dimen/label_hieght"
+            android:layout_height="@dimen/label_width"
+            android:background="#03a9f4"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Football Season 2016"
+            android:textColor="#ffffff"
+            app:label_backgroundColor="#C2185B"
+            app:label_orientation="RIGHT_TOP"
+            app:label_text="Coming Soon"
+            app:label_textSize="10sp"
+            app:label_visual="true" />
+
+        <com.sprungsolutions.sitorstart.LabelButtonView
+            android:id="@+id/labelbutton3"
+            android:layout_width="@dimen/label_hieght"
+            android:layout_height="@dimen/label_width"
+            android:background="#03a9f4"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="BAsketball Season 2016"
+            android:textColor="#ffffff"
+            app:label_backgroundColor="#C2185B"
+            app:label_orientation="RIGHT_TOP"
+            app:label_text="Coming Soon"
+            app:label_textSize="10sp"
+            app:label_visual="true" />
+
+        <com.sprungsolutions.sitorstart.LabelButtonView
+            android:id="@+id/labelbutton4"
+            android:layout_width="@dimen/label_hieght"
+            android:layout_height="@dimen/label_width"
+            android:background="#03a9f4"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Hockey Season 2016"
+            android:textColor="#ffffff"
+            app:label_backgroundColor="#C2185B"
+            app:label_orientation="RIGHT_TOP"
+            app:label_text="Coming Soon"
+            app:label_textSize="10sp"
+            app:label_visual="true" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

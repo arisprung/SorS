@@ -33,5 +33,7 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.2+'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.beardedhen:androidbootstrap:2.1.0'
+    compile 'com.github.d-max:spots-dialog:0.4@aar'
+    compile 'cn.pedant.sweetalert:library:1.3'
 
 }

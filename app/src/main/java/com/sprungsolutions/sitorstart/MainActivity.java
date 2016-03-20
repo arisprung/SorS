@@ -1,7 +1,9 @@
 package com.sprungsolutions.sitorstart;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,16 +20,20 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-
+    private Handler handler = new Handler();
     private RecyclerView.Adapter mAdapter;
 
-    private ArrayList<PlayerSetFirebase> mPLayerList;
-    private ArrayList<PlayerSetFirebase> mList;
+    private ArrayList<NewPlayerSet> mPlayerList;
+
     private SSSharedPreferencesManager ssPrefrenceManager;
+    private SpotsDialog mDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ssPrefrenceManager = SSSharedPreferencesManager.getInstance(getApplicationContext());
+        mDialog = new SpotsDialog(MainActivity.this, R.style.Custom);
+        mDialog.show();
 
       //  SitOrStartApplication.getInstance().getMyFirebaseRef().authAnonymously(new AuthResultHandler("anonymous"));
 
@@ -61,12 +69,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                runnable.run();
+            }
+        }, 500);
+
         // Layout Managers:
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mPLayerList = new ArrayList<>();
+        mPlayerList = new ArrayList<>();
         // Item Decorator:
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
-        mAdapter = new SSRecyclerViewAdapter(MainActivity.this, mPLayerList);
+        mAdapter = new SSRecyclerViewAdapter(MainActivity.this, mPlayerList);
         ((SSRecyclerViewAdapter) mAdapter).setMode(Attributes.Mode.Single);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(onScrollListener);
@@ -147,23 +162,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 try{
-                    mPLayerList.clear();
+                    mPlayerList.clear();
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
-                        PlayerSetFirebase post = postSnapshot.getValue(PlayerSetFirebase.class);
-                        post.setSet_id(postSnapshot.getKey());
-                        PlayerSetFirebase post1 = checkIfPlayerWasSelected(post);
-                        mPLayerList.add(post1);
+                        NewPlayerSet set = postSnapshot.getValue(NewPlayerSet.class);
+                        set.setId(postSnapshot.getKey());
+                        NewPlayerSet post1 = checkIfPlayerWasSelected(set);
+                        mPlayerList.add(post1);
 
                     }
+                    SitOrStartApplication.getInstance().setmPlayerSetArrayList(mPlayerList);
                     mAdapter.notifyDataSetChanged();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
-
-
-
             }
 
             @Override
@@ -175,20 +187,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private PlayerSetFirebase checkIfPlayerWasSelected(PlayerSetFirebase post) {
+    private NewPlayerSet checkIfPlayerWasSelected(NewPlayerSet post) {
 
         ArrayList<String> list = ssPrefrenceManager.loadID(getApplicationContext());
         if (list != null) {
             for (String s : list) {
                 String stemp = s.substring(0, s.length() - 1);
 
-                if (stemp.equals(post.getSet_id())) {
+                if (stemp.equals(post.getId())) {
                     String send = s.substring(s.length() - 1, s.length());
                     if (send.equals("1")) {
-                        post.setPlayer1selected(true);
+                        post.getmPlayer1().setSelected(true);
 
                     } else {
-                        post.setPlayer2selected(true);
+                        post.getmPlayer2().setSelected(true);
                     }
                     return post;
 
@@ -211,4 +223,16 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         ssPrefrenceManager.removeKey(SSSharedPreferencesManager.START_OR_SIT_SET_ID);
     }
+
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            Log.d("HomeActivty", "Checking to cancel Progress");
+            if (SitOrStartApplication.getInstance().ismIsFireBAseInitLoaded()) {
+                handler.postDelayed(this, 500);
+            } else {
+                mDialog.dismiss();
+                handler.removeCallbacks(runnable);
+            }
+        }
+    };
 }

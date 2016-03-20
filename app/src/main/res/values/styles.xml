@@ -28,12 +28,17 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <style name="MyDialogTheme" parent="android:Theme.Dialog">
-        <item name="android:background">#ffdddddd</item>
-    </style>
+    <!--<style name="MyDialogTheme" parent="android:Theme.Dialog">-->
+        <!--<item name="android:background">#ffdddddd</item>-->
+    <!--</style>-->
 
     <!-- Application theme. -->
-
+    <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Loading Players…</item>
+        <item name="DialogSpotColor">@android:color/holo_orange_dark</item>
+        <item name="DialogSpotCount">4</item>
+    </style>
 
 
 </resources>

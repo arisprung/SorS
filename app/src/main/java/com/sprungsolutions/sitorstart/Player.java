@@ -13,6 +13,8 @@ public class Player {
     private String mlb_team;
     private String mlb_team_long;
     private String arm_throws;
+    private int score;
+    private boolean selected;
 
 
     public Player() {
@@ -82,5 +84,37 @@ public class Player {
 
     public void setArm_throws(String arm_throws) {
         this.arm_throws = arm_throws;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "bats='" + bats + '\'' +
+                ", birth_year='" + birth_year + '\'' +
+                ", mlb_id='" + mlb_id + '\'' +
+                ", mlb_name='" + mlb_name + '\'' +
+                ", mlb_pos='" + mlb_pos + '\'' +
+                ", mlb_team='" + mlb_team + '\'' +
+                ", mlb_team_long='" + mlb_team_long + '\'' +
+                ", arm_throws='" + arm_throws + '\'' +
+                ", score=" + score +
+                ", selected=" + selected +
+                '}';
     }
 }
