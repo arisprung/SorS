@@ -1,6 +1,7 @@
 package com.sprungsolutions.sitorstart;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +82,12 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
             @Override
             public void onBackFirstLayout(LinearLayout view, int i) {
+                NewPlayerSet item = mDataset.get(i);
+                Intent webIntent = new Intent(mContext,PlayerWebView.class);
+                webIntent.putExtra("player_url","http://m.mlb.com/player/"+item.getmPlayer1().getMlb_id());
+                webIntent.putExtra("player_name",item.getmPlayer1().getMlb_name());
 
+                mContext.startActivity(webIntent);
             }
 
             @Override
@@ -119,6 +125,10 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
             @Override
             public void onBackSecondLayout(LinearLayout view, int i) {
                 NewPlayerSet item = mDataset.get(i);
+                Intent webIntent = new Intent(mContext,PlayerWebView.class);
+                webIntent.putExtra("player_url","http://m.mlb.com/player/"+item.getmPlayer2().getMlb_id());
+                webIntent.putExtra("player_name",item.getmPlayer2().getMlb_name());
+                mContext.startActivity(webIntent);
 
             }
         });
@@ -341,9 +351,9 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
             } else if (v.getId() == R.id.front_ll_2) {
                 mListener.onSecondLayout((LinearLayout) v, getLayoutPosition());
             } else if (v.getId() == R.id.back_ll_1) {
-                mListener.onSecondLayout((LinearLayout) v, getLayoutPosition());
+                mListener.onBackFirstLayout((LinearLayout) v, getLayoutPosition());
             } else if (v.getId() == R.id.back_ll_2) {
-                mListener.onSecondLayout((LinearLayout) v, getLayoutPosition());
+                mListener.onBackSecondLayout((LinearLayout) v, getLayoutPosition());
             }
 
         }
