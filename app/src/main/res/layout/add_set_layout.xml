@@ -37,7 +37,7 @@
                 android:src="@android:drawable/ic_input_add"
                 android:layout_height="100dp" />
 
-            <com.sprungsolutions.sitorstart.FontTextView
+            <com.sprungsolutions.sitorstart.views.FontTextView
                 android:id="@+id/name1"
                 android:text="www"
                 android:layout_gravity="center"
@@ -62,7 +62,7 @@
                 android:src="@android:drawable/ic_input_add"
                 android:layout_height="100dp" />
 
-            <com.sprungsolutions.sitorstart.FontTextView
+            <com.sprungsolutions.sitorstart.views.FontTextView
                 android:id="@+id/name2"
                 android:layout_width="wrap_content"
                 android:text="wwww"

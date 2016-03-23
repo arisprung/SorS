@@ -1,4 +1,4 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;

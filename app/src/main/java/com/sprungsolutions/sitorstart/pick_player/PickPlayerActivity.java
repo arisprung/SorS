@@ -1,4 +1,4 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.pick_player;
 
 
 import android.app.Activity;
@@ -11,9 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.sprungsolutions.sitorstart.views.DividerItemDecoration;
+import com.sprungsolutions.sitorstart.R;
+import com.sprungsolutions.sitorstart.utility.SSSharedPreferencesManager;
+import com.sprungsolutions.sitorstart.application.SitOrStartApplication;
 
 import java.util.ArrayList;
 import java.util.List;

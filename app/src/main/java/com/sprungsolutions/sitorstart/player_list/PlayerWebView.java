@@ -1,4 +1,4 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.player_list;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.sprungsolutions.sitorstart.R;
 
 import dmax.dialog.SpotsDialog;
 

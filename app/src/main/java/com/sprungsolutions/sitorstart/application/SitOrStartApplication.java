@@ -1,13 +1,15 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.application;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.sprungsolutions.sitorstart.R;
+import com.sprungsolutions.sitorstart.pick_player.NewPlayerSet;
+import com.sprungsolutions.sitorstart.pick_player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

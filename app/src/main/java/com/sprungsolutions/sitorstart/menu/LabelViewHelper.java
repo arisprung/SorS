@@ -1,4 +1,4 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.menu;
 
 /**
  * Created by arisprung on 3/19/16.
@@ -12,6 +12,8 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.sprungsolutions.sitorstart.R;
 
 public class LabelViewHelper {
 

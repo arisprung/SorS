@@ -1,8 +1,9 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.player_list;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,12 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.MutableData;
 import com.firebase.client.Transaction;
+import com.sprungsolutions.sitorstart.pick_player.NewPlayerSet;
+import com.sprungsolutions.sitorstart.R;
+import com.sprungsolutions.sitorstart.application.SitOrStartApplication;
+import com.sprungsolutions.sitorstart.utility.SSSharedPreferencesManager;
+import com.sprungsolutions.sitorstart.utility.SitStartUtility;
+import com.sprungsolutions.sitorstart.views.FontTextView;
 
 import java.util.ArrayList;
 
@@ -30,13 +37,38 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
     private Activity mContext;
     private ArrayList<NewPlayerSet> mDataset;
     private SSSharedPreferencesManager ssPrefrenceManager;
-    private final float INCREASE_BAR = 500.0f;
+    private  float INCREASE_BAR = 500.0f;
 
 
     public SSRecyclerViewAdapter(Activity context, ArrayList<NewPlayerSet> objects) {
         mContext = context;
         mDataset = objects;
         ssPrefrenceManager = SSSharedPreferencesManager.getInstance(mContext);
+
+        switch (mContext.getResources().getDisplayMetrics().densityDpi) {
+            case DisplayMetrics.DENSITY_LOW:
+                INCREASE_BAR = 200.0f;
+
+                break;
+            case DisplayMetrics.DENSITY_MEDIUM:
+                INCREASE_BAR = 200.0f;
+                break;
+            case DisplayMetrics.DENSITY_HIGH:
+                INCREASE_BAR = 200;
+                break;
+            case DisplayMetrics.DENSITY_XHIGH:
+                INCREASE_BAR = 200.0f;
+                break;
+            case DisplayMetrics.DENSITY_XXHIGH:
+                INCREASE_BAR =400.0f;
+                break;
+            case DisplayMetrics.DENSITY_XXXHIGH:
+                INCREASE_BAR = 500.0f;
+                break;
+            case DisplayMetrics.DENSITY_TV:
+                INCREASE_BAR = 200.0f;
+                break;
+        }
     }
 
     public SSRecyclerViewAdapter() {
@@ -54,7 +86,7 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
             @Override
             public void onFirstLayout(LinearLayout view, int i) {
                 NewPlayerSet item = mDataset.get(i);
-                view.setBackgroundResource(R.drawable.border_layout);
+              //  view.setBackgroundResource(R.drawable.border_layout_right_w);
                 if (view.getTag().equals("selected")) {
                     ssPrefrenceManager.removeID(mContext, item.getId() + 1);
                     view.setBackgroundResource(SitOrStartApplication.getInstance().getSelectorResourceId(i, false)[0]);
@@ -158,6 +190,9 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
         viewHolder.mName1.setText(item.getmPlayer1().getMlb_name());
         viewHolder.mName2.setText(item.getmPlayer2().getMlb_name());
 
+        viewHolder.mBackName1.setText(item.getmPlayer1().getMlb_name());
+        viewHolder.mBackName2.setText(item.getmPlayer2().getMlb_name());
+
         viewHolder.mTeamName1.setText(item.getmPlayer1().getMlb_pos() + " - " + item.getmPlayer1().getMlb_team());
         viewHolder.mTeamName2.setText(item.getmPlayer2().getMlb_pos() + " - " + item.getmPlayer2().getMlb_team());
 
@@ -225,11 +260,11 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
 
 
         if (i1 > i2) {
-            viewHolder.mPercent1.setBackgroundResource(android.R.color.holo_green_dark);
-            viewHolder.mPercent2.setBackgroundResource(android.R.color.darker_gray);
-        } else if (i2 > i2) {
-            viewHolder.mPercent2.setBackgroundResource(android.R.color.holo_green_dark);
-            viewHolder.mPercent1.setBackgroundResource(android.R.color.darker_gray);
+            viewHolder.mPercent1.setBackgroundResource(R.drawable.rounded_corner_left_w);
+            viewHolder.mPercent2.setBackgroundResource(R.drawable.rounded_corner_right_l);
+        } else if (i2 > i1) {
+            viewHolder.mPercent2.setBackgroundResource(R.drawable.rounded_corner_right_w);
+            viewHolder.mPercent1.setBackgroundResource(R.drawable.rounded_corner_left_l);
         }
 
 
@@ -294,6 +329,8 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
         private ImageView backImageView2;
         private FontTextView mName1;
         private FontTextView mName2;
+        private FontTextView mBackName1;
+        private FontTextView mBackName2;
         private FontTextView mTeamName1;
         private FontTextView mTeamName2;
         private LinearLayout mLinearLayout1;
@@ -322,8 +359,14 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
             mBackLinearLayout2 = (LinearLayout) itemView.findViewById(R.id.back_ll_2);
             mName1 = (FontTextView) itemView.findViewById(R.id.front_name_1);
             mName2 = (FontTextView) itemView.findViewById(R.id.front_name_2);
+
+            mBackName1 = (FontTextView) itemView.findViewById(R.id.back_name_1);
+            mBackName2 = (FontTextView) itemView.findViewById(R.id.back_name_2);
+
             mPercent1 = (View) itemView.findViewById(R.id.player_percnt_1);
             mPercent2 = (View) itemView.findViewById(R.id.player_percnt_2);
+
+
 
             mPercentText1 = (FontTextView) itemView.findViewById(R.id.player_percnt_text_1);
             mPercentText2 = (FontTextView) itemView.findViewById(R.id.player_percnt_text_2);

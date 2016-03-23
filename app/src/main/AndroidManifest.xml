@@ -6,13 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".SitOrStartApplication"
+        android:name=".application.SitOrStartApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".player_list.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".menu.MainMenuActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>-->
@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".PickPlayerActivity"
+            android:name=".pick_player.PickPlayerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -48,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".PlayerWebView"
+            android:name=".player_list.PlayerWebView"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 

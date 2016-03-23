@@ -1,4 +1,4 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.pick_player;
 
 
 import android.app.Activity;
@@ -15,11 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.firebase.client.Firebase;
 import com.google.gson.Gson;
+import com.sprungsolutions.sitorstart.R;
+import com.sprungsolutions.sitorstart.application.SitOrStartApplication;
+import com.sprungsolutions.sitorstart.utility.SitStartUtility;
+import com.sprungsolutions.sitorstart.views.FontTextView;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;

@@ -1,9 +1,11 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.Button;
+
+import com.sprungsolutions.sitorstart.menu.LabelViewHelper;
 
 /**
  * Created by arisprung on 3/19/16.

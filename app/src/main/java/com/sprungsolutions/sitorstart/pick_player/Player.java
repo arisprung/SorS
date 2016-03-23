@@ -1,4 +1,4 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.pick_player;
 
 /**
  * Created by arisprung on 3/6/16.

@@ -1,4 +1,4 @@
-package com.sprungsolutions.sitorstart;
+package com.sprungsolutions.sitorstart.utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;
