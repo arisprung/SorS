@@ -127,9 +127,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/black" />
-
-
-
         </RelativeLayout>
 
         <RelativeLayout
