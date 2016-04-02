@@ -29,4 +29,20 @@
     <color name="fbutton_color_silver">#bdc3c7</color>
     <color name="fbutton_color_concrete">#95a5a6</color>
     <color name="fbutton_color_asbestos">#7f8c8d</color>
+
+
+    <color name="list_color_purple">#676BA5</color>
+    <color name="list_color_pink">#CB6A8A</color>
+    <color name="list_color_green">#66B1BB</color>
+    <color name="list_color_brown">#B28C5E</color>
+    <color name="list_color_light_green">#66A590</color>
+    <color name="list_color_blue">#6D93C1</color>
+    <color name="list_color_dark_purple">#A33F8D</color>
+    <color name="list_color_dark_pink">#CB5A67</color>
+    <color name="list_color_dark__green">#68A964</color>
+    <color name="list_color_olive">#B8AF54</color>
+
+
+
+
 </resources>

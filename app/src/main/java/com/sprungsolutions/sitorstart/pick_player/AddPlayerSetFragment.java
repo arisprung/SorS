@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.firebase.client.Firebase;
@@ -46,7 +47,7 @@ public class AddPlayerSetFragment extends DialogFragment {
     private CircleImageView mCircleImage2;
     private Handler mHandler;
     private SpotsDialog mDialog;
-
+    private String mPackageName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class AddPlayerSetFragment extends DialogFragment {
         mName2 = (FontTextView) mView.findViewById(R.id.name2);
         mName1.setVisibility(View.GONE);
         mName2.setVisibility(View.GONE);
+        mPackageName = getActivity().getApplicationContext().getPackageName();
 
         return mView;
     }
@@ -108,11 +110,16 @@ public class AddPlayerSetFragment extends DialogFragment {
             public void handleMessage(Message msg) {
                 mDialog.dismiss();
                 if(msg.getData().getBoolean("exist")){
-                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Oops...")
-                            .setContentText("This combination already exist please try a different one")
-                            .show();
-                  //  Toast.makeText(getContext(),"This combination already exist please try a different one",Toast.LENGTH_SHORT).show();
+                    if(getActivity() != null){
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText("This combination already exist please try a different one")
+                                .show();
+                    }else{
+                        Toast.makeText(getContext(),"This combination already exist please try a different one", Toast.LENGTH_SHORT).show();
+                    }
+
+
 
                 }else{
                     sendSetToFireBase();
@@ -138,6 +145,37 @@ public class AddPlayerSetFragment extends DialogFragment {
         NewPlayerSet set = new NewPlayerSet(mPlayer1, mPlayer2);
         set.setId(String.valueOf(i));
         playerRef.push().setValue(set);
+
+        showShareDialog();
+    }
+
+    private void showShareDialog() {
+
+        if(getActivity() != null){
+
+            new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Player Set Added")
+                    .setContentText("Your player set was added succesfully.\nDo you want to ask your freinds who to start?")
+                    .setCancelText("No thank you")
+                    .setConfirmText("Yes!")
+                    .showCancelButton(true)
+                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.cancel();
+                        }
+                    })
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            Intent in = new Intent("com.sprungsolutions.sharerecoever");
+                            SitOrStartApplication.getInstance().sendBroadcast(in);
+                            sDialog.cancel();
+                        }
+                    })
+                    .show();
+        }
+
     }
 
     private void sendPlayerToServer() {
@@ -157,22 +195,7 @@ public class AddPlayerSetFragment extends DialogFragment {
         Thread mythread = new Thread(runnable);
         mythread.start();
 
-//        Snackbar snack = Snackbar.make(getView(), "Your selection was sent.", Snackbar.LENGTH_LONG);
-//
-//        snack.setCallback(new Snackbar.Callback() {
-//
-//            @Override
-//            public void onDismissed(Snackbar snackbar, int event) {
-//                dialog.dismiss();
-//
-//            }
-//
-//            @Override
-//            public void onShown(Snackbar snackbar) {
-//
-//            }
-//        });
-//        snack.show();
+
 
 
     }

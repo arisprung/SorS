@@ -1,7 +1,10 @@
 package com.sprungsolutions.sitorstart.player_list;
 
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private SSRecyclerViewAdapter mAdapter;
     private ArrayList<NewPlayerSet> mPlayerList;
-
+    ShareReceiver myReceiver;
     public ChainTourGuide mTutorialHandler;
     public Sequence mSequence;
 
@@ -143,117 +146,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setupTutorial() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter("com.sprungsolutions.sharerecoever");
+        myReceiver = new ShareReceiver();
+        registerReceiver(myReceiver, filter);
+    }
 
-
-        ViewGroup view = ((ViewGroup) mRecyclerView.getChildAt(0));
-        ViewGroup view1 = ((ViewGroup) view.getChildAt(0));
-        ViewGroup view2 = ((ViewGroup) view1.getChildAt(1));
-        ViewGroup view3 = ((ViewGroup) view2.getChildAt(0));
-
-        mSlidedView = view3.getChildAt(1);
-
-        ViewGroup sview = ((ViewGroup) mRecyclerView.getChildAt(2));
-        ViewGroup sview1 = ((ViewGroup) sview.getChildAt(0));
-        ViewGroup sview2 = ((ViewGroup) sview1.getChildAt(1));
-        ViewGroup sview3 = ((ViewGroup) sview2.getChildAt(0));
-
-        mSelectedView = sview3.getChildAt(1);
-
-        ChainTourGuide mTG1 = ChainTourGuide.init(this)
-                .setToolTip(new ToolTip()
-                        .setTitle("Swipe To see result!")
-                        .setDescription("See the result of the challange")
-                        .setGravity(Gravity.BOTTOM))
-                .setOverlay(new Overlay()
-                        .setEnterAnimation(mEnterAnimation).setExitAnimation(mEnterAnimation))
-                .playLater(mFab);
-
-
-        ChainTourGuide mTG2 = ChainTourGuide.init(this)
-                .setToolTip(new ToolTip()
-                        .setTitle("Select PLayer to start!")
-                        .setDescription("Select who you think should start and help the fantasy world")
-                        .setGravity(Gravity.BOTTOM))
-                .playLater(mFab);
-
-        ChainTourGuide mTG3 = ChainTourGuide.init(this)
-                .setToolTip(new ToolTip()
-                        .setTitle("Add Set!")
-                        .setDescription("Want to start your own set presss +")
-                        .setGravity(Gravity.TOP | Gravity.LEFT))
-                .playLater(mFab);
-
-
-//        mSequence = new Sequence.SequenceBuilder()
-//                .add(mTG1, mTG2,mTG3)
-//                .setDefaultOverlay(new Overlay()
-//                        .setEnterAnimation(mEnterAnimation).setExitAnimation(mExitAnimation)
-//                        .setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-////                                mTutorialHandler.next();
-////                                if(mTimesTutorialNext == 0){
-////                                    mTutorialHandler.next();
-////
-//////                                    final Handler handler = new Handler();
-//////                                    handler.postDelayed(new Runnable() {
-//////                                        @Override
-//////                                        public void run() {
-//////
-//////                                            selectAndDeselctLayout();
-//////
-//////
-//////                                        }
-//////                                    }, 500);
-////                                } else{
-////                                    mTutorialHandler.next();
-////                                }
-////
-////                                mTimesTutorialNext++;
-//
-//                            }
-//                        }))
-//
-//                .setDefaultPointer(new Pointer())
-//                .setContinueMethod(Sequence.ContinueMethod.OverlayListener)
-//                .build();
-//
-//        mTutorialHandler = ChainTourGuide.init(this)
-//                .playInSequence(mSequence);
-
-
-//        final Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                swipeAndCloseLayout();
-//
-//
-//            }
-//        }, 500);
-
-        Sequence sequence = new Sequence.SequenceBuilder()
-                .add(mTG1, mTG2, mTG3)
-                .setDefaultOverlay(new Overlay()
-                        .setEnterAnimation(mEnterAnimation)
-                        .setExitAnimation(mExitAnimation)
-                        .setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(MainActivity.this, "default Overlay clicked", Toast.LENGTH_SHORT).show();
-                                mTutorialHandler.next();
-                            }
-                        })
-                )
-                .setDefaultPointer(null)
-                .setContinueMethod(Sequence.ContinueMethod.OverlayListener)
-                .build();
-
-        mTutorialHandler = ChainTourGuide.init(this).playInSequence(sequence);
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(myReceiver);
     }
 
     private void selectAndDeselctLayout() {
@@ -464,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
                                         //Do something after 100ms
                                         playSelectDeselectTutorial();
                                         if(!stopSelectDelay){
-                                            handler.postDelayed(this, 2000);
+                                            handler.postDelayed(this, 1000);
                                         }
 
                                     }
@@ -518,6 +422,8 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 mTutorialHandler.next();
+                                stopSelectDelay = true;
+                                stopSelectDelay = true;
                             }
                         })
                 )
@@ -546,7 +452,7 @@ public class MainActivity extends AppCompatActivity {
                 //Do something after 100ms
                 swipeAndCloseLayout();
                 if(!stopswipeDelay){
-                    handler.postDelayed(this, 2000);
+                    handler.postDelayed(this, 1000);
                 }
 
             }
@@ -565,16 +471,26 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 500);
     }
-//    private void playSlideUnslideTutorial() {
-//        final Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                swipeAndCloseLayout();
-//
-//
-//            }
-//        }, 500);
-//    }
+
+
+    public class ShareReceiver extends BroadcastReceiver {
+
+        private String TAG = ShareReceiver.class.getSimpleName();
+
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle results = getResultExtras(true);
+            String hierarchy = results.getString("player_set");
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            share.putExtra(Intent.EXTRA_TEXT,hierarchy);
+            startActivity(Intent.createChooser(share, "share"));
+
+
+            Log.d(TAG, "MyReceiver");
+        }
+    }
+
 }
