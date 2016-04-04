@@ -482,8 +482,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Bundle results = getResultExtras(true);
-            String hierarchy = results.getString("player_set");
+
+            String hierarchy = intent.getExtras().getString("player_set");
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.putExtra(Intent.EXTRA_TEXT, hierarchy);

@@ -244,13 +244,8 @@
                             android:text="team"
                             android:textColor="@android:color/white"
                             android:textSize="12sp" />
-
-
                     </LinearLayout>
-
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <ImageView

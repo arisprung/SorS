@@ -169,6 +169,7 @@ public class AddPlayerSetFragment extends DialogFragment {
                         @Override
                         public void onClick(SweetAlertDialog sDialog) {
                             Intent in = new Intent("com.sprungsolutions.sharerecoever");
+                            in.putExtra("player_set","Help me decide who to start "+mPlayer1.getMlb_name()+ " or "+mPlayer2.getMlb_name()+ " To vote download "+ "http://play.google.com/store/apps/details?id=" + mPackageName);
                             SitOrStartApplication.getInstance().sendBroadcast(in);
                             sDialog.cancel();
                         }
