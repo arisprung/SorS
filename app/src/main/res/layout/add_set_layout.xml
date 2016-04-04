@@ -1,122 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="30dp"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
     <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/my_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+    <!--android:id="@+id/my_toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="?attr/colorPrimary"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
 
     <LinearLayout
         android:id="@+id/image_ll"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
 
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:padding="30dp">
 
 
         <LinearLayout
             android:id="@+id/player1_ll"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="100dp"
                 android:id="@+id/circle_image1"
-                android:background="@drawable/dotted_box"
-                android:src="@android:drawable/ic_input_add"
-                android:layout_height="100dp" />
+                android:layout_width="100dp"
+                android:layout_gravity="center"
+                android:layout_height="100dp"
+                android:background="@drawable/addbutton" />
 
             <com.sprungsolutions.sitorstart.views.FontTextView
                 android:id="@+id/name1"
-                android:text="www"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:gravity="center_horizontal"
+                android:text="www" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/player2_ll"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+
+            android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="100dp"
                 android:id="@+id/circle_image2"
-                android:background="@drawable/dotted_box"
-                android:src="@android:drawable/ic_input_add"
-                android:layout_height="100dp" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@drawable/addbutton" />
 
             <com.sprungsolutions.sitorstart.views.FontTextView
                 android:id="@+id/name2"
                 android:layout_width="wrap_content"
-                android:text="wwww"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                />
+                android:gravity="center_horizontal"
+                android:text="wwww" />
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_ll"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+
         android:orientation="horizontal">
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/add_set"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Add"
-            app:bootstrapBrand="regular"
+            app:bootstrapBrand="success"
             app:bootstrapSize="lg"
             app:buttonMode="regular"
-            app:showOutline="false"
-            app:roundedCorners="true"
-            />
+            app:roundedCorners="false"
+            app:showOutline="false" />
 
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/cancel_set"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+
             android:text="Cancel"
             app:bootstrapBrand="danger"
             app:bootstrapSize="lg"
-            android:layout_marginLeft="30dp"
             app:buttonMode="regular"
-            app:showOutline="false"
-            app:roundedCorners="true"
-            />
-
+            app:roundedCorners="false"
+            app:showOutline="false" />
 
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

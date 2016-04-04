@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private SSRecyclerViewAdapter mAdapter;
     private ArrayList<NewPlayerSet> mPlayerList;
-    ShareReceiver myReceiver;
+    private ShareReceiver myReceiver;
     public ChainTourGuide mTutorialHandler;
     public Sequence mSequence;
 
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean stopSelectDelay;
     private boolean stopswipeDelay;
 
-    private int mTimesTutorialNext = 0;
+
 
 
     @Override
@@ -324,7 +323,11 @@ public class MainActivity extends AppCompatActivity {
                 mDialog.dismiss();
                 handler.removeCallbacks(runnable);
                 //setupTutorial();
-                runOverlayListener_ContinueMethod();
+                if(!ssPrefrenceManager.getBooleanSharedPreferences(SSSharedPreferencesManager.START_OR_SIT_TUTORIAL_DONE,false)){
+                    runOverlayListener_ContinueMethod();
+                    ssPrefrenceManager.putBooleanSharedPreferences(SSSharedPreferencesManager.START_OR_SIT_TUTORIAL_DONE,true);
+                }
+
 
             }
         }
@@ -335,9 +338,9 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup view = ((ViewGroup) mRecyclerView.getChildAt(0));
         ViewGroup view1 = ((ViewGroup) view.getChildAt(0));
         ViewGroup view2 = ((ViewGroup) view1.getChildAt(1));
-        mSlidedView=  view2.getChildAt(0);
+        mSlidedView = view2.getChildAt(0);
 
-      //  mSlidedView = view3.getChildAt(1);
+        //  mSlidedView = view3.getChildAt(1);
 
         ViewGroup sview = ((ViewGroup) mRecyclerView.getChildAt(2));
         ViewGroup sview1 = ((ViewGroup) sview.getChildAt(0));
@@ -349,13 +352,14 @@ public class MainActivity extends AppCompatActivity {
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle("Swipe To see result!")
-                        .setDescription("See the result of the challange")
+                        .setBackgroundColor(Color.parseColor("#B33EB0"))
+                        .setDescription("See the result of the challenge\nand then select player to see stats!")
                         .setGravity(Gravity.BOTTOM)
                 )
                 .setOverlay(new Overlay()
                         .setEnterAnimation(mEnterAnimation)
                         .setExitAnimation(mExitAnimation)
-                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -367,14 +371,12 @@ public class MainActivity extends AppCompatActivity {
                                     public void run() {
                                         //Do something after 100ms
                                         playSelectDeselectTutorial();
-                                        if(!stopSelectDelay){
+                                        if (!stopSelectDelay) {
                                             handler.postDelayed(this, 1000);
                                         }
 
                                     }
                                 }, 500);
-
-
 
 
                             }
@@ -385,9 +387,9 @@ public class MainActivity extends AppCompatActivity {
 
         ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("Select PLayer to start!")
+                        .setTitle("Select Player to start!")
                         .setDescription("Select who you think should start and help the fantasy world")
-                        .setBackgroundColor(Color.parseColor("#c0392b"))
+                        .setBackgroundColor(Color.parseColor("#66A590"))
                         .setGravity(Gravity.BOTTOM)
                 )
                 .setOverlay(new Overlay()
@@ -408,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
                 .setToolTip(new ToolTip()
                         .setTitle("Add Set!")
                         .setDescription("Want to start your own set presss +")
-                        .setGravity(Gravity.TOP)
+                        .setGravity(Gravity.TOP|Gravity.LEFT)
                 )
                 // note that there is not Overlay here, so the default one will be used
                 .playLater(mFab);
@@ -451,7 +453,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 //Do something after 100ms
                 swipeAndCloseLayout();
-                if(!stopswipeDelay){
+                if (!stopswipeDelay) {
                     handler.postDelayed(this, 1000);
                 }
 
@@ -484,8 +486,7 @@ public class MainActivity extends AppCompatActivity {
             String hierarchy = results.getString("player_set");
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
-            share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            share.putExtra(Intent.EXTRA_TEXT,hierarchy);
+            share.putExtra(Intent.EXTRA_TEXT, hierarchy);
             startActivity(Intent.createChooser(share, "share"));
 
 

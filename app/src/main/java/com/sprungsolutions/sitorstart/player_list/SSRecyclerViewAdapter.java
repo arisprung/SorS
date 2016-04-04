@@ -271,7 +271,7 @@ public class SSRecyclerViewAdapter extends RecyclerSwipeAdapter<SSRecyclerViewAd
         }
 
 
-        Firebase upvotesRef = new Firebase("https://sitorstart.firebaseio.com/sports/mlb/mlb_player_set/" + number + "/" + strType + "/score");
+        Firebase upvotesRef = new Firebase(mContext.getString(R.string.firebase_url)+"sports/mlb/mlb_player_set/" + number + "/" + strType + "/score");
         upvotesRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData currentData) {

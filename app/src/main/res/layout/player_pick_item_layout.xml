@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/pick_player_item_background"
     android:id="@+id/picker_player_root"
+    android:padding="5dp"
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/player_image"
-        android:layout_width="@dimen/image_width"
-        android:layout_height="@dimen/image_hieght"
-        app:civ_border_width="2dp"
-        app:civ_border_color="@color/red"
+        android:layout_width="65dp"
+        android:layout_height="90dp"
+
+
          />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/player_image"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
 
@@ -35,7 +40,7 @@
             android:text="P"
             android:textColor="@android:color/black"
             app:fontName="fire_sans_light.otf"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

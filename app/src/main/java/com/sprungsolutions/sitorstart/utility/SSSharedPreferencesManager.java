@@ -19,6 +19,7 @@ public class SSSharedPreferencesManager {
     private static SSSharedPreferencesManager mHomeSharedPreferences = null;
 
     public static final String START_OR_SIT_SET_ID = "set_id";
+    public static final String START_OR_SIT_TUTORIAL_DONE = "tutorial_done";
 
 
     private SSSharedPreferencesManager(Context context) {

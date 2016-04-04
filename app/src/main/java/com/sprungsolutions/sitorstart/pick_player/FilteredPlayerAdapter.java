@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.sprungsolutions.sitorstart.views.FontTextView;
 import com.sprungsolutions.sitorstart.R;
@@ -111,7 +112,7 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
     public  class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public FontTextView mPlayerName;
-        public LinearLayout mLinearLayout;
+        public RelativeLayout mLinearLayout;
         public FontTextView mPlayerTeam;
         public CircleImageView mPlayerImage;
 
@@ -123,7 +124,7 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
             mPlayerName = (FontTextView)itemLayoutView.findViewById(R.id.player_name);
             mPlayerTeam = (FontTextView) itemLayoutView.findViewById(R.id.player_team_position);
             mPlayerImage = (CircleImageView)itemLayoutView.findViewById(R.id.player_image);
-            mLinearLayout = (LinearLayout)itemLayoutView.findViewById(R.id.picker_player_root);
+            mLinearLayout = (RelativeLayout)itemLayoutView.findViewById(R.id.picker_player_root);
 
 
 

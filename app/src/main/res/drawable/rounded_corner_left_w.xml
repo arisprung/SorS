@@ -5,7 +5,7 @@
 
     <!-- view background color -->
     <solid
-        android:color="@android:color/holo_green_light" >
+        android:color="@color/list_color_win" >
     </solid>
 
     <!--&lt;!&ndash; view border color and width &ndash;&gt;-->
@@ -23,10 +23,6 @@
     <!--</padding>-->
 
     <!-- Here is the corner radius -->
-    <corners
-        android:bottomLeftRadius="10dp"
-        android:topLeftRadius="10dp"
-          >
-    </corners>
+
 
 </shape>

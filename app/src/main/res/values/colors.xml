@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#66B1BB</color>
+    <color name="colorPrimaryDark">#66B1BB</color>
     <color name="colorAccent">#FF4081</color>
     <color name="backgroundColor">#000</color>
     <color name="backgroundColorPress">#DBDBD3</color>
@@ -41,6 +41,14 @@
     <color name="list_color_dark_pink">#CB5A67</color>
     <color name="list_color_dark__green">#68A964</color>
     <color name="list_color_olive">#B8AF54</color>
+    <color name="list_color_win">#73AE4D</color>
+    <color name="list_color_lose">#AA8E4A</color>
+    <color name="pick_player_item_background">#D9D9D9</color>
+
+
+
+
+
 
 
 

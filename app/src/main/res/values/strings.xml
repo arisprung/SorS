@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SitorStart</string>
+    <string name="app_name">Sit or Start</string>
     <string name="action_settings">Settings</string>
     <string name="firebase_url">https://sitorstart.firebaseio.com/</string>
     <string name="subscription_period_prompt">Select your subscription period</string>
