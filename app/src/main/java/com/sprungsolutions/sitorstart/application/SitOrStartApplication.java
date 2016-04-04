@@ -3,6 +3,7 @@ package com.sprungsolutions.sitorstart.application;
 import android.app.Application;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.crashlytics.android.Crashlytics;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -11,6 +12,7 @@ import com.sprungsolutions.sitorstart.R;
 import com.sprungsolutions.sitorstart.pick_player.NewPlayerSet;
 import com.sprungsolutions.sitorstart.pick_player.Player;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,6 +33,7 @@ public class SitOrStartApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         Firebase.setAndroidContext(this);
         initSelectors();
         instance = this;

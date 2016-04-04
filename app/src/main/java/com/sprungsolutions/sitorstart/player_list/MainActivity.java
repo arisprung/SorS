@@ -466,31 +466,20 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 selectAndDeselctLayout();
-
-
             }
         }, 500);
     }
 
 
     public class ShareReceiver extends BroadcastReceiver {
-
-        private String TAG = ShareReceiver.class.getSimpleName();
-
-
         @Override
         public void onReceive(Context context, Intent intent) {
-
             String hierarchy = intent.getExtras().getString("player_set");
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.putExtra(Intent.EXTRA_TEXT, hierarchy);
             startActivity(Intent.createChooser(share, "share"));
-
-
-            Log.d(TAG, "MyReceiver");
         }
     }
 

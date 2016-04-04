@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sprungsolutions.sitorstart" >
+
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sprungsolutions.sitorstart">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,6 +13,8 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        tools:replace="android:icon,android:theme"
+        android:icon="@drawable/sit_start_icon"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".player_list.MainActivity"
@@ -65,6 +69,9 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b010c896e6646ae32a9badeac27206351aa358ab" />
     </application>
 
 </manifest>
