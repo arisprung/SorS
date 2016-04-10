@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
+import com.appsee.Appsee;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
 import com.firebase.client.DataSnapshot;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Appsee.start(getString(R.string.app_see));
 
         if (!SitStartUtility.haveNetworkConnection(getApplicationContext())) {
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)

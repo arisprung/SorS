@@ -2,6 +2,7 @@ package com.sprungsolutions.sitorstart.application;
 
 import android.app.Application;
 
+import com.appsee.Appsee;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.crashlytics.android.Crashlytics;
 import com.firebase.client.DataSnapshot;
@@ -38,6 +39,7 @@ public class SitOrStartApplication extends Application {
         initSelectors();
         instance = this;
         TypefaceProvider.registerDefaultIconSets();
+
         myFirebaseRef = new Firebase(getString(R.string.firebase_url));
        init();
 

@@ -42,7 +42,7 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Player model = mModels.get(position);
-        holder.bind(model,position);
+        holder.bind(model);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
 
         }
 
-        public void bind(Player model, final int position) {
+        public void bind(final Player model) {
             mPlayerName.setText(model.getMlb_name());
             mPlayerTeam.setText("("+model.getMlb_pos()+") "+model.getMlb_team_long());
 //        holder.mPlayerTeam.setChecked(cc.isSelected());
@@ -140,7 +140,7 @@ public class FilteredPlayerAdapter extends RecyclerView.Adapter<FilteredPlayerAd
                 @Override
                 public void onClick(View view) {
                     if (mItemClickListner != null){
-                        mItemClickListner.onItemClick(mModels.get(position));
+                        mItemClickListner.onItemClick(model);
                     }
                 }
             });

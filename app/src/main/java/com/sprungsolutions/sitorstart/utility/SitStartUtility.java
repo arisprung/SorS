@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.sprungsolutions.sitorstart.R;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -19,6 +20,8 @@ public class SitStartUtility {
         Picasso
                 .with(context)
                 .load(url)
+                .error(R.drawable.playerdummy)
+                .placeholder(R.drawable.playerdummy)
                 .fit()
                 .centerInside()
                 .into(view);
