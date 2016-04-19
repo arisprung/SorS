@@ -25,7 +25,7 @@
         android:orientation="vertical">
 
 
-        <com.sprungsolutions.sitorstart.views.FontTextView
+        <com.sprungsolutions.sitstart.views.FontTextView
             android:id="@+id/player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:textColor="@android:color/black"
             app:fontName="fire_sans_bold.otf"
             android:textSize="14sp" />
-        <com.sprungsolutions.sitorstart.views.FontTextView
+        <com.sprungsolutions.sitstart.views.FontTextView
             android:id="@+id/player_team_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

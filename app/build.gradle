@@ -20,16 +20,16 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.sprungsolutions.sitorstart"
+        applicationId "com.sprungsolutions.sitstart"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 3
+        versionCode 6
         versionName "1.0"
     }
 
     signingConfigs {
         release {
-            keyAlias "com.sprungsolutions.sitorstart"
+            keyAlias "com.sprungsolutions.sitstart"
             keyPassword '123456'
             storeFile file('/Volumes/code/SitorStart/cert.jks')
             storePassword '123456'

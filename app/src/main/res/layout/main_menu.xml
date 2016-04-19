@@ -11,7 +11,7 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <com.sprungsolutions.sitorstart.views.LabelButtonView
+        <com.sprungsolutions.sitstart.views.LabelButtonView
             android:id="@+id/labelbutton1"
             android:layout_width="@dimen/label_hieght"
             android:layout_height="@dimen/label_width"
@@ -25,7 +25,7 @@
             app:label_textSize="10sp"
             app:label_visual="false" />
 
-        <com.sprungsolutions.sitorstart.views.LabelButtonView
+        <com.sprungsolutions.sitstart.views.LabelButtonView
             android:id="@+id/labelbutton2"
             android:layout_width="@dimen/label_hieght"
             android:layout_height="@dimen/label_width"
@@ -40,7 +40,7 @@
             app:label_textSize="10sp"
             app:label_visual="true" />
 
-        <com.sprungsolutions.sitorstart.views.LabelButtonView
+        <com.sprungsolutions.sitstart.views.LabelButtonView
             android:id="@+id/labelbutton3"
             android:layout_width="@dimen/label_hieght"
             android:layout_height="@dimen/label_width"
@@ -55,7 +55,7 @@
             app:label_textSize="10sp"
             app:label_visual="true" />
 
-        <com.sprungsolutions.sitorstart.views.LabelButtonView
+        <com.sprungsolutions.sitstart.views.LabelButtonView
             android:id="@+id/labelbutton4"
             android:layout_width="@dimen/label_hieght"
             android:layout_height="@dimen/label_width"

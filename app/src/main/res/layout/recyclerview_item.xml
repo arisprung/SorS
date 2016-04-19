@@ -41,7 +41,7 @@
                         android:layout_height="@dimen/image_hieght" />
 
 
-                    <com.sprungsolutions.sitorstart.views.FontTextView
+                    <com.sprungsolutions.sitstart.views.FontTextView
                         android:id="@+id/back_name_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                         android:layout_height="@dimen/image_hieght"
                          />
 
-                    <com.sprungsolutions.sitorstart.views.FontTextView
+                    <com.sprungsolutions.sitstart.views.FontTextView
                         android:id="@+id/back_name_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     android:background="@drawable/rounded_corner_left_w"
                     android:orientation="horizontal" />
 
-                <com.sprungsolutions.sitorstart.views.FontTextView
+                <com.sprungsolutions.sitstart.views.FontTextView
                     android:id="@+id/player_percnt_text_1"
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
@@ -118,7 +118,7 @@
                     android:background="@drawable/rounded_corner_right_w"
                     android:orientation="horizontal" />
 
-                <com.sprungsolutions.sitorstart.views.FontTextView
+                <com.sprungsolutions.sitstart.views.FontTextView
                     android:id="@+id/player_percnt_text_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                         android:layout_gravity="center"
                         android:orientation="vertical">
 
-                        <com.sprungsolutions.sitorstart.views.FontTextView
+                        <com.sprungsolutions.sitstart.views.FontTextView
                             android:id="@+id/front_name_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
-                        <com.sprungsolutions.sitorstart.views.FontTextView
+                        <com.sprungsolutions.sitstart.views.FontTextView
                             android:id="@+id/front_name_team_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
                         android:layout_gravity="center"
                         android:orientation="vertical">
 
-                        <com.sprungsolutions.sitorstart.views.FontTextView
+                        <com.sprungsolutions.sitstart.views.FontTextView
                             android:id="@+id/front_name_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -236,7 +236,7 @@
                             android:textColor="@android:color/white"
                             android:textSize="14sp" />
 
-                        <com.sprungsolutions.sitorstart.views.FontTextView
+                        <com.sprungsolutions.sitstart.views.FontTextView
                             android:id="@+id/front_name_team_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
